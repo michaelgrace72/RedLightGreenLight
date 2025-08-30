@@ -7,7 +7,7 @@ class RedLightGreenLight {
         
         this.currentState = 'neutral';
         this.lastKeyPress = 0;
-        this.keyPressDelay = 1000; // 1 second delay between key presses
+        this.keyPressDelay = 200; // 1 second delay between key presses
         
         this.init();
     }
@@ -20,17 +20,23 @@ class RedLightGreenLight {
         
         // Prevent default behavior for specific keys
         document.addEventListener('keydown', (event) => {
-            if (event.key.toLowerCase() === 'r' || event.key.toLowerCase() === 'g') {
+            if (event.key.toLowerCase() === 'r' || 
+                event.key.toLowerCase() === 'g' || 
+                event.key === 'ArrowLeft' || 
+                event.key === 'ArrowRight') {
                 event.preventDefault();
             }
         });
         
         console.log('Red Light Green Light game initialized!');
         console.log('Press R for Red Light, G for Green Light');
+        console.log('Or use PowerPoint controls: Left Arrow for Red Light, Right Arrow for Green Light');
     }
     
     handleKeyPress(event) {
-        const key = event.key.toLowerCase();
+        const key = event.key.toLowerCase() === 'r' || event.key.toLowerCase() === 'g' 
+            ? event.key.toLowerCase() 
+            : event.key; // Keep arrow keys as-is
         const currentTime = Date.now();
         
         // Check if enough time has passed since the last key press
@@ -41,10 +47,12 @@ class RedLightGreenLight {
         
         switch (key) {
             case 'r':
+            case 'ArrowLeft': // PowerPoint back button for red light
                 this.showRedLight();
                 this.lastKeyPress = currentTime;
                 break;
             case 'g':
+            case 'ArrowRight': // PowerPoint next button for green light
                 this.showGreenLight();
                 this.lastKeyPress = currentTime;
                 break;
