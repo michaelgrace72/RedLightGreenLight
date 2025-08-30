@@ -23,14 +23,18 @@ class RedLightGreenLight {
             if (event.key.toLowerCase() === 'r' || 
                 event.key.toLowerCase() === 'g' || 
                 event.key === 'ArrowLeft' || 
-                event.key === 'ArrowRight') {
+                event.key === 'ArrowRight' ||
+                event.key === 'ArrowUp' ||
+                event.key === 'ArrowDown' ||
+                event.key === 'PageUp' ||
+                event.key === 'PageDown') {
                 event.preventDefault();
             }
         });
         
         console.log('Red Light Green Light game initialized!');
         console.log('Press R for Red Light, G for Green Light');
-        console.log('Or use PowerPoint controls: Left Arrow for Red Light, Right Arrow for Green Light');
+        console.log('Or use PowerPoint controls: Left/Down/PageDown for Red Light, Right/Up/PageUp for Green Light');
     }
     
     handleKeyPress(event) {
@@ -48,11 +52,15 @@ class RedLightGreenLight {
         switch (key) {
             case 'r':
             case 'ArrowLeft': // PowerPoint back button for red light
+            case 'ArrowDown': // PowerPoint down button for red light
+            case 'PageDown': // PowerPoint page down button for red light
                 this.showRedLight();
                 this.lastKeyPress = currentTime;
                 break;
             case 'g':
             case 'ArrowRight': // PowerPoint next button for green light
+            case 'ArrowUp': // PowerPoint up button for green light
+            case 'PageUp': // PowerPoint page up button for green light
                 this.showGreenLight();
                 this.lastKeyPress = currentTime;
                 break;
