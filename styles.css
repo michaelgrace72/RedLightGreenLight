@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+#game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#light-display {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+#light-text {
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* Neutral state */
+.neutral {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: #ecf0f1;
+}
+
+/* Red light state */
+.red-light {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    animation: pulse-red 0.5s ease-in-out;
+}
+
+/* Green light state */
+.green-light {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    animation: pulse-green 0.5s ease-in-out;
+}
+
+/* Pulse animations */
+@keyframes pulse-red {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes pulse-green {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+#instructions {
+    position: absolute;
+    bottom: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+#instructions p {
+    margin: 0.5rem 0;
+}
+
+kbd {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Hide instructions when in red or green state */
+.red-light #instructions,
+.green-light #instructions {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #light-text {
+        font-size: 2.5rem;
+        padding: 0 1rem;
+    }
+    
+    #instructions {
+        font-size: 1rem;
+        bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #light-text {
+        font-size: 2rem;
+    }
+    
+    #instructions {
+        font-size: 0.9rem;
+    }
+}
